@@ -4,9 +4,9 @@ using IPlayground.Data.Common.Models;
 
 namespace IPlayground.Data.Models
 {
-    public class Picture : BaseDeletableModel<string>
+    public class Gallery : BaseDeletableModel<string>
     {
-        public Picture()
+        public Gallery()
         {
             this.Id = Guid
                 .NewGuid()
@@ -18,9 +18,5 @@ namespace IPlayground.Data.Models
         public string AddedByUserId { get; set; }
 
         public virtual ApplicationUser AddedByUser { get; set; }
-
-        public int GameId { get; set; }
-
-        public virtual Game Game { get; set; }
     }
 }

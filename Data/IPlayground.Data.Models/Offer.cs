@@ -1,4 +1,5 @@
 ﻿using System;
+
 using IPlayground.Data.Common.Models;
 
 namespace IPlayground.Data.Models

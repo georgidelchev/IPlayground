@@ -29,7 +29,7 @@ namespace IPlayground.Data
 
         public DbSet<Offer> Offers { get; set; }
 
-        public DbSet<Picture> Pictures { get; set; }
+        public DbSet<Gallery> Pictures { get; set; }
 
         public DbSet<Product> Products { get; set; }
 
