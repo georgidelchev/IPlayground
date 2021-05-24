@@ -1,11 +1,10 @@
-﻿namespace IPlayground.Web.Controllers
+﻿using System.Diagnostics;
+
+using IPlayground.Web.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+
+namespace IPlayground.Web.Controllers
 {
-    using System.Diagnostics;
-
-    using IPlayground.Web.ViewModels;
-
-    using Microsoft.AspNetCore.Mvc;
-
     public class HomeController : BaseController
     {
         public IActionResult Index()

@@ -1,7 +1,7 @@
-﻿namespace IPlayground.Services.Mapping
-{
-    using AutoMapper;
+﻿using AutoMapper;
 
+namespace IPlayground.Services.Mapping
+{
     public interface IHaveCustomMappings
     {
         void CreateMappings(IProfileExpression configuration);

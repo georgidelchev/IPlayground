@@ -1,12 +1,11 @@
-﻿namespace IPlayground.Data
+﻿using System;
+using System.Threading.Tasks;
+
+using IPlayground.Data.Common;
+using Microsoft.EntityFrameworkCore;
+
+namespace IPlayground.Data
 {
-    using System;
-    using System.Threading.Tasks;
-
-    using IPlayground.Data.Common;
-
-    using Microsoft.EntityFrameworkCore;
-
     public class DbQueryRunner : IDbQueryRunner
     {
         public DbQueryRunner(ApplicationDbContext context)

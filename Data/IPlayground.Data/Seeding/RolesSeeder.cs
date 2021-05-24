@@ -1,15 +1,14 @@
-﻿namespace IPlayground.Data.Seeding
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+
+using IPlayground.Common;
+using IPlayground.Data.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace IPlayground.Data.Seeding
 {
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
-
-    using IPlayground.Common;
-    using IPlayground.Data.Models;
-
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.Extensions.DependencyInjection;
-
     internal class RolesSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)

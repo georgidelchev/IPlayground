@@ -1,8 +1,8 @@
-﻿namespace IPlayground.Services.Messaging
-{
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
+namespace IPlayground.Services.Messaging
+{
     public interface IEmailSender
     {
         Task SendEmailAsync(

@@ -1,7 +1,7 @@
-﻿namespace IPlayground.Data.Models
-{
-    using IPlayground.Data.Common.Models;
+﻿using IPlayground.Data.Common.Models;
 
+namespace IPlayground.Data.Models
+{
     public class Setting : BaseDeletableModel<int>
     {
         public string Name { get; set; }

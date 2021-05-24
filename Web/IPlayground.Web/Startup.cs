@@ -1,27 +1,26 @@
-﻿namespace IPlayground.Web
+﻿using System.Reflection;
+
+using IPlayground.Data;
+using IPlayground.Data.Common;
+using IPlayground.Data.Common.Repositories;
+using IPlayground.Data.Models;
+using IPlayground.Data.Repositories;
+using IPlayground.Data.Seeding;
+using IPlayground.Services.Data;
+using IPlayground.Services.Mapping;
+using IPlayground.Services.Messaging;
+using IPlayground.Web.ViewModels;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+namespace IPlayground.Web
 {
-    using System.Reflection;
-
-    using IPlayground.Data;
-    using IPlayground.Data.Common;
-    using IPlayground.Data.Common.Repositories;
-    using IPlayground.Data.Models;
-    using IPlayground.Data.Repositories;
-    using IPlayground.Data.Seeding;
-    using IPlayground.Services.Data;
-    using IPlayground.Services.Mapping;
-    using IPlayground.Services.Messaging;
-    using IPlayground.Web.ViewModels;
-
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
-
     public class Startup
     {
         private readonly IConfiguration configuration;

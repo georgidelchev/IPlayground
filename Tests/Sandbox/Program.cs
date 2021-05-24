@@ -1,26 +1,24 @@
-﻿namespace Sandbox
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
+
+using CommandLine;
+using IPlayground.Data;
+using IPlayground.Data.Common;
+using IPlayground.Data.Common.Repositories;
+using IPlayground.Data.Models;
+using IPlayground.Data.Repositories;
+using IPlayground.Data.Seeding;
+using IPlayground.Services.Data;
+using IPlayground.Services.Messaging;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+
+namespace Sandbox
 {
-    using System;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Threading.Tasks;
-
-    using IPlayground.Data;
-    using IPlayground.Data.Common;
-    using IPlayground.Data.Common.Repositories;
-    using IPlayground.Data.Models;
-    using IPlayground.Data.Repositories;
-    using IPlayground.Data.Seeding;
-    using IPlayground.Services.Data;
-    using IPlayground.Services.Messaging;
-
-    using CommandLine;
-
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Logging;
-
     public static class Program
     {
         public static int Main(string[] args)

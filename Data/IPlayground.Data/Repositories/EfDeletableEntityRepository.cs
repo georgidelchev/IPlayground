@@ -1,13 +1,12 @@
-﻿namespace IPlayground.Data.Repositories
+﻿using System;
+using System.Linq;
+
+using IPlayground.Data.Common.Models;
+using IPlayground.Data.Common.Repositories;
+using Microsoft.EntityFrameworkCore;
+
+namespace IPlayground.Data.Repositories
 {
-    using System;
-    using System.Linq;
-
-    using IPlayground.Data.Common.Models;
-    using IPlayground.Data.Common.Repositories;
-
-    using Microsoft.EntityFrameworkCore;
-
     public class EfDeletableEntityRepository<TEntity> : EfRepository<TEntity>, IDeletableEntityRepository<TEntity>
         where TEntity : class, IDeletableEntity
     {

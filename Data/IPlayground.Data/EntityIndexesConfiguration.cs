@@ -1,11 +1,10 @@
-﻿namespace IPlayground.Data
+﻿using System.Linq;
+
+using IPlayground.Data.Common.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace IPlayground.Data
 {
-    using System.Linq;
-
-    using IPlayground.Data.Common.Models;
-
-    using Microsoft.EntityFrameworkCore;
-
     internal static class EntityIndexesConfiguration
     {
         public static void Configure(ModelBuilder modelBuilder)

@@ -1,8 +1,8 @@
-﻿namespace IPlayground.Web
-{
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
+namespace IPlayground.Web
+{
     public static class Program
     {
         public static void Main(string[] args)

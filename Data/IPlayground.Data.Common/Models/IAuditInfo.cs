@@ -1,7 +1,7 @@
-﻿namespace IPlayground.Data.Common.Models
-{
-    using System;
+﻿using System;
 
+namespace IPlayground.Data.Common.Models
+{
     public interface IAuditInfo
     {
         DateTime CreatedOn { get; set; }

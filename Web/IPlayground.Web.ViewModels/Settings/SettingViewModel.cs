@@ -1,10 +1,9 @@
-﻿namespace IPlayground.Web.ViewModels.Settings
+﻿using AutoMapper;
+using IPlayground.Data.Models;
+using IPlayground.Services.Mapping;
+
+namespace IPlayground.Web.ViewModels.Settings
 {
-    using IPlayground.Data.Models;
-    using IPlayground.Services.Mapping;
-
-    using AutoMapper;
-
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {
         public int Id { get; set; }

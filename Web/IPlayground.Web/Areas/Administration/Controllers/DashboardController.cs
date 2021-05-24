@@ -1,10 +1,9 @@
-﻿namespace IPlayground.Web.Areas.Administration.Controllers
+﻿using IPlayground.Services.Data;
+using IPlayground.Web.ViewModels.Administration.Dashboard;
+using Microsoft.AspNetCore.Mvc;
+
+namespace IPlayground.Web.Areas.Administration.Controllers
 {
-    using IPlayground.Services.Data;
-    using IPlayground.Web.ViewModels.Administration.Dashboard;
-
-    using Microsoft.AspNetCore.Mvc;
-
     public class DashboardController : AdministrationController
     {
         private readonly ISettingsService settingsService;

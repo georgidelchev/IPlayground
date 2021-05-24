@@ -1,15 +1,14 @@
-﻿namespace IPlayground.Web.Controllers
+﻿using System;
+using System.Threading.Tasks;
+
+using IPlayground.Data.Common.Repositories;
+using IPlayground.Data.Models;
+using IPlayground.Services.Data;
+using IPlayground.Web.ViewModels.Settings;
+using Microsoft.AspNetCore.Mvc;
+
+namespace IPlayground.Web.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-
-    using IPlayground.Data.Common.Repositories;
-    using IPlayground.Data.Models;
-    using IPlayground.Services.Data;
-    using IPlayground.Web.ViewModels.Settings;
-
-    using Microsoft.AspNetCore.Mvc;
-
     public class SettingsController : BaseController
     {
         private readonly ISettingsService settingsService;

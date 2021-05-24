@@ -1,12 +1,11 @@
 ﻿// ReSharper disable VirtualMemberCallInConstructor
+using System;
+
+using IPlayground.Data.Common.Models;
+using Microsoft.AspNetCore.Identity;
+
 namespace IPlayground.Data.Models
 {
-    using System;
-
-    using IPlayground.Data.Common.Models;
-
-    using Microsoft.AspNetCore.Identity;
-
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {
         public ApplicationRole()

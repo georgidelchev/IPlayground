@@ -1,7 +1,7 @@
-﻿namespace IPlayground.Services.Data
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace IPlayground.Services.Data
+{
     public interface ISettingsService
     {
         int GetCount();

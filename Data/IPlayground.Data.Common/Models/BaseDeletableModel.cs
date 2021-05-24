@@ -1,7 +1,7 @@
-﻿namespace IPlayground.Data.Common.Models
-{
-    using System;
+﻿using System;
 
+namespace IPlayground.Data.Common.Models
+{
     public abstract class BaseDeletableModel<TKey> : BaseModel<TKey>, IDeletableEntity
     {
         public bool IsDeleted { get; set; }

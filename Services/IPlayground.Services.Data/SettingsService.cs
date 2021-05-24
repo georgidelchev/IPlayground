@@ -1,12 +1,12 @@
-﻿namespace IPlayground.Services.Data
+﻿using System.Collections.Generic;
+using System.Linq;
+
+using IPlayground.Data.Common.Repositories;
+using IPlayground.Data.Models;
+using IPlayground.Services.Mapping;
+
+namespace IPlayground.Services.Data
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using IPlayground.Data.Common.Repositories;
-    using IPlayground.Data.Models;
-    using IPlayground.Services.Mapping;
-
     public class SettingsService : ISettingsService
     {
         private readonly IDeletableEntityRepository<Setting> settingsRepository;
