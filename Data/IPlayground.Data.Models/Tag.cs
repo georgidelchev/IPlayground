@@ -5,13 +5,13 @@ using IPlayground.Data.Common.Models;
 
 namespace IPlayground.Data.Models
 {
-    public class Product : BaseDeletableModel<int>
+    public class Tag : BaseDeletableModel<int>
     {
         [Required]
-        [MaxLength(30)]
+        [MaxLength(15)]
         public string Name { get; set; }
 
-        public virtual ICollection<Category> Categories { get; set; }
-            = new HashSet<Category>();
+        public virtual ICollection<News> News { get; set; }
+            = new HashSet<News>();
     }
 }

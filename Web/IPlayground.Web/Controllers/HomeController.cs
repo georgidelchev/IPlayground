@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IPlayground.Web.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
         public IActionResult Index()
         {

@@ -25,7 +25,13 @@ namespace IPlayground.Data
 
         public DbSet<Category> Categories { get; set; }
 
+        public DbSet<Contact> Contacts { get; set; }
+
+        public DbSet<Gallery> Gallery { get; set; }
+
         public DbSet<Game> Games { get; set; }
+
+        public DbSet<News> News { get; set; }
 
         public DbSet<Offer> Offers { get; set; }
 
@@ -34,6 +40,8 @@ namespace IPlayground.Data
         public DbSet<Product> Products { get; set; }
 
         public DbSet<Reservation> Reservations { get; set; }
+
+        public DbSet<Tag> Tags { get; set; }
 
         public override int SaveChanges()
             => this.SaveChanges(true);

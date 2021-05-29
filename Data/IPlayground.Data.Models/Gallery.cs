@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 using IPlayground.Data.Common.Models;
 
@@ -13,8 +14,10 @@ namespace IPlayground.Data.Models
                 .ToString();
         }
 
+        [Required]
         public string Extension { get; set; }
 
+        [Required]
         public string AddedByUserId { get; set; }
 
         public virtual ApplicationUser AddedByUser { get; set; }
