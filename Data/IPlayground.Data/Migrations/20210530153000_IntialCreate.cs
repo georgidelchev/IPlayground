@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IPlayground.Data.Migrations
@@ -55,12 +56,48 @@ namespace IPlayground.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Contacts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FullName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contacts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Offers",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -72,12 +109,29 @@ namespace IPlayground.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Picture",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Extension = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Picture", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -93,11 +147,11 @@ namespace IPlayground.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FullName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -106,6 +160,23 @@ namespace IPlayground.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reservations", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tags",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tags", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -215,15 +286,64 @@ namespace IPlayground.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Gallery",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Extension = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AddedByUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Gallery", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Gallery_AspNetUsers_AddedByUserId",
+                        column: x => x.AddedByUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "News",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_News", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_News_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Games",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddedByUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    AddedByUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -238,112 +358,82 @@ namespace IPlayground.Data.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Pictures",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Extension = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddedByUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pictures", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pictures_AspNetUsers_AddedByUserId",
-                        column: x => x.AddedByUserId,
-                        principalTable: "AspNetUsers",
+                        name: "FK_Games_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categories",
+                name: "CategoryProduct",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddedByUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ProductId = table.Column<int>(type: "int", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    CategoriesId = table.Column<int>(type: "int", nullable: false),
+                    ProductsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.PrimaryKey("PK_CategoryProduct", x => new { x.CategoriesId, x.ProductsId });
                     table.ForeignKey(
-                        name: "FK_Categories_AspNetUsers_AddedByUserId",
-                        column: x => x.AddedByUserId,
-                        principalTable: "AspNetUsers",
+                        name: "FK_CategoryProduct_Categories_CategoriesId",
+                        column: x => x.CategoriesId,
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Categories_Products_ProductId",
-                        column: x => x.ProductId,
+                        name: "FK_CategoryProduct_Products_ProductsId",
+                        column: x => x.ProductsId,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Picture",
+                name: "NewsTag",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Extension = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddedByUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    GameId = table.Column<int>(type: "int", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    NewsId = table.Column<int>(type: "int", nullable: false),
+                    TagsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Picture", x => x.Id);
+                    table.PrimaryKey("PK_NewsTag", x => new { x.NewsId, x.TagsId });
                     table.ForeignKey(
-                        name: "FK_Picture_AspNetUsers_AddedByUserId",
-                        column: x => x.AddedByUserId,
-                        principalTable: "AspNetUsers",
+                        name: "FK_NewsTag_News_NewsId",
+                        column: x => x.NewsId,
+                        principalTable: "News",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Picture_Games_GameId",
-                        column: x => x.GameId,
-                        principalTable: "Games",
+                        name: "FK_NewsTag_Tags_TagsId",
+                        column: x => x.TagsId,
+                        principalTable: "Tags",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CategoryGame",
+                name: "GamePicture",
                 columns: table => new
                 {
-                    CategoriesId = table.Column<int>(type: "int", nullable: false),
-                    GamesId = table.Column<int>(type: "int", nullable: false)
+                    GamesId = table.Column<int>(type: "int", nullable: false),
+                    PicturesId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CategoryGame", x => new { x.CategoriesId, x.GamesId });
+                    table.PrimaryKey("PK_GamePicture", x => new { x.GamesId, x.PicturesId });
                     table.ForeignKey(
-                        name: "FK_CategoryGame_Categories_CategoriesId",
-                        column: x => x.CategoriesId,
-                        principalTable: "Categories",
+                        name: "FK_GamePicture_Games_GamesId",
+                        column: x => x.GamesId,
+                        principalTable: "Games",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_CategoryGame_Games_GamesId",
-                        column: x => x.GamesId,
-                        principalTable: "Games",
+                        name: "FK_GamePicture_Picture_PicturesId",
+                        column: x => x.PicturesId,
+                        principalTable: "Picture",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -398,24 +488,34 @@ namespace IPlayground.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Categories_AddedByUserId",
-                table: "Categories",
-                column: "AddedByUserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Categories_IsDeleted",
                 table: "Categories",
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Categories_ProductId",
-                table: "Categories",
-                column: "ProductId");
+                name: "IX_CategoryProduct_ProductsId",
+                table: "CategoryProduct",
+                column: "ProductsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CategoryGame_GamesId",
-                table: "CategoryGame",
-                column: "GamesId");
+                name: "IX_Contacts_IsDeleted",
+                table: "Contacts",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Gallery_AddedByUserId",
+                table: "Gallery",
+                column: "AddedByUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Gallery_IsDeleted",
+                table: "Gallery",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GamePicture_PicturesId",
+                table: "GamePicture",
+                column: "PicturesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Games_AddedByUserId",
@@ -423,9 +523,29 @@ namespace IPlayground.Data.Migrations
                 column: "AddedByUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Games_CategoryId",
+                table: "Games",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Games_IsDeleted",
                 table: "Games",
                 column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_News_ApplicationUserId",
+                table: "News",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_News_IsDeleted",
+                table: "News",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NewsTag_TagsId",
+                table: "NewsTag",
+                column: "TagsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Offers_IsDeleted",
@@ -433,28 +553,8 @@ namespace IPlayground.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Picture_AddedByUserId",
-                table: "Picture",
-                column: "AddedByUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Picture_GameId",
-                table: "Picture",
-                column: "GameId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Picture_IsDeleted",
                 table: "Picture",
-                column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Pictures_AddedByUserId",
-                table: "Pictures",
-                column: "AddedByUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Pictures_IsDeleted",
-                table: "Pictures",
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
@@ -465,6 +565,11 @@ namespace IPlayground.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Reservations_IsDeleted",
                 table: "Reservations",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tags_IsDeleted",
+                table: "Tags",
                 column: "IsDeleted");
         }
 
@@ -486,16 +591,22 @@ namespace IPlayground.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CategoryGame");
+                name: "CategoryProduct");
+
+            migrationBuilder.DropTable(
+                name: "Contacts");
+
+            migrationBuilder.DropTable(
+                name: "Gallery");
+
+            migrationBuilder.DropTable(
+                name: "GamePicture");
+
+            migrationBuilder.DropTable(
+                name: "NewsTag");
 
             migrationBuilder.DropTable(
                 name: "Offers");
-
-            migrationBuilder.DropTable(
-                name: "Picture");
-
-            migrationBuilder.DropTable(
-                name: "Pictures");
 
             migrationBuilder.DropTable(
                 name: "Reservations");
@@ -504,13 +615,22 @@ namespace IPlayground.Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Games");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Picture");
+
+            migrationBuilder.DropTable(
+                name: "News");
+
+            migrationBuilder.DropTable(
+                name: "Tags");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

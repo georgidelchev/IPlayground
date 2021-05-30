@@ -11,12 +11,10 @@ namespace IPlayground.Data.Models
         [MaxLength(20)]
         public string Name { get; set; }
 
-        [Required]
-        public string AddedByUserId { get; set; }
-
-        public virtual ApplicationUser AddedByUser { get; set; }
-
         public virtual ICollection<Game> Games { get; set; }
             = new HashSet<Game>();
+
+        public virtual ICollection<Product> Products { get; set; }
+            = new HashSet<Product>();
     }
 }

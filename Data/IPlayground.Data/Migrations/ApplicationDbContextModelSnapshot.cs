@@ -19,19 +19,34 @@ namespace IPlayground.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CategoryGame", b =>
+            modelBuilder.Entity("CategoryProduct", b =>
                 {
                     b.Property<int>("CategoriesId")
                         .HasColumnType("int");
 
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CategoriesId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("CategoryProduct");
+                });
+
+            modelBuilder.Entity("GamePicture", b =>
+                {
                     b.Property<int>("GamesId")
                         .HasColumnType("int");
 
-                    b.HasKey("CategoriesId", "GamesId");
+                    b.Property<int>("PicturesId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("GamesId");
+                    b.HasKey("GamesId", "PicturesId");
 
-                    b.ToTable("CategoryGame");
+                    b.HasIndex("PicturesId");
+
+                    b.ToTable("GamePicture");
                 });
 
             modelBuilder.Entity("IPlayground.Data.Models.ApplicationRole", b =>
@@ -161,9 +176,6 @@ namespace IPlayground.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AddedByUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -177,20 +189,55 @@ namespace IPlayground.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddedByUserId");
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("IPlayground.Data.Models.Contact", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Categories");
+                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("IPlayground.Data.Models.Gallery", b =>
@@ -199,6 +246,7 @@ namespace IPlayground.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AddedByUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
@@ -208,6 +256,7 @@ namespace IPlayground.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Extension")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
@@ -222,7 +271,7 @@ namespace IPlayground.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("Pictures");
+                    b.ToTable("Gallery");
                 });
 
             modelBuilder.Entity("IPlayground.Data.Models.Game", b =>
@@ -233,7 +282,11 @@ namespace IPlayground.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AddedByUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -242,7 +295,9 @@ namespace IPlayground.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -251,7 +306,9 @@ namespace IPlayground.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -260,9 +317,52 @@ namespace IPlayground.Data.Migrations
 
                     b.HasIndex("AddedByUserId");
 
+                    b.HasIndex("CategoryId");
+
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Games");
+                });
+
+            modelBuilder.Entity("IPlayground.Data.Models.News", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("News");
                 });
 
             modelBuilder.Entity("IPlayground.Data.Models.Offer", b =>
@@ -277,7 +377,9 @@ namespace IPlayground.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -286,7 +388,9 @@ namespace IPlayground.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
@@ -297,11 +401,10 @@ namespace IPlayground.Data.Migrations
 
             modelBuilder.Entity("IPlayground.Data.Models.Picture", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AddedByUserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -310,10 +413,9 @@ namespace IPlayground.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Extension")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("GameId")
-                        .HasColumnType("int");
+                        .IsRequired()
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -322,10 +424,6 @@ namespace IPlayground.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AddedByUserId");
-
-                    b.HasIndex("GameId");
 
                     b.HasIndex("IsDeleted");
 
@@ -352,7 +450,9 @@ namespace IPlayground.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
@@ -376,21 +476,27 @@ namespace IPlayground.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Message")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -398,6 +504,37 @@ namespace IPlayground.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Reservations");
+                });
+
+            modelBuilder.Entity("IPlayground.Data.Models.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -504,7 +641,22 @@ namespace IPlayground.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("CategoryGame", b =>
+            modelBuilder.Entity("NewsTag", b =>
+                {
+                    b.Property<int>("NewsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("NewsId", "TagsId");
+
+                    b.HasIndex("TagsId");
+
+                    b.ToTable("NewsTag");
+                });
+
+            modelBuilder.Entity("CategoryProduct", b =>
                 {
                     b.HasOne("IPlayground.Data.Models.Category", null)
                         .WithMany()
@@ -512,31 +664,35 @@ namespace IPlayground.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("IPlayground.Data.Models.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GamePicture", b =>
+                {
                     b.HasOne("IPlayground.Data.Models.Game", null)
                         .WithMany()
                         .HasForeignKey("GamesId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("IPlayground.Data.Models.Category", b =>
-                {
-                    b.HasOne("IPlayground.Data.Models.ApplicationUser", "AddedByUser")
+                    b.HasOne("IPlayground.Data.Models.Picture", null)
                         .WithMany()
-                        .HasForeignKey("AddedByUserId");
-
-                    b.HasOne("IPlayground.Data.Models.Product", null)
-                        .WithMany("Categories")
-                        .HasForeignKey("ProductId");
-
-                    b.Navigation("AddedByUser");
+                        .HasForeignKey("PicturesId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("IPlayground.Data.Models.Gallery", b =>
                 {
                     b.HasOne("IPlayground.Data.Models.ApplicationUser", "AddedByUser")
                         .WithMany()
-                        .HasForeignKey("AddedByUserId");
+                        .HasForeignKey("AddedByUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("AddedByUser");
                 });
@@ -544,27 +700,27 @@ namespace IPlayground.Data.Migrations
             modelBuilder.Entity("IPlayground.Data.Models.Game", b =>
                 {
                     b.HasOne("IPlayground.Data.Models.ApplicationUser", "AddedByUser")
-                        .WithMany()
-                        .HasForeignKey("AddedByUserId");
+                        .WithMany("Games")
+                        .HasForeignKey("AddedByUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("AddedByUser");
-                });
-
-            modelBuilder.Entity("IPlayground.Data.Models.Picture", b =>
-                {
-                    b.HasOne("IPlayground.Data.Models.ApplicationUser", "AddedByUser")
-                        .WithMany()
-                        .HasForeignKey("AddedByUserId");
-
-                    b.HasOne("IPlayground.Data.Models.Game", "Game")
-                        .WithMany("Pictures")
-                        .HasForeignKey("GameId")
+                    b.HasOne("IPlayground.Data.Models.Category", "Category")
+                        .WithMany("Games")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("AddedByUser");
 
-                    b.Navigation("Game");
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("IPlayground.Data.Models.News", b =>
+                {
+                    b.HasOne("IPlayground.Data.Models.ApplicationUser", null)
+                        .WithMany("News")
+                        .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -618,23 +774,37 @@ namespace IPlayground.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("NewsTag", b =>
+                {
+                    b.HasOne("IPlayground.Data.Models.News", null)
+                        .WithMany()
+                        .HasForeignKey("NewsId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("IPlayground.Data.Models.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("IPlayground.Data.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Claims");
 
+                    b.Navigation("Games");
+
                     b.Navigation("Logins");
+
+                    b.Navigation("News");
 
                     b.Navigation("Roles");
                 });
 
-            modelBuilder.Entity("IPlayground.Data.Models.Game", b =>
+            modelBuilder.Entity("IPlayground.Data.Models.Category", b =>
                 {
-                    b.Navigation("Pictures");
-                });
-
-            modelBuilder.Entity("IPlayground.Data.Models.Product", b =>
-                {
-                    b.Navigation("Categories");
+                    b.Navigation("Games");
                 });
 #pragma warning restore 612, 618
         }

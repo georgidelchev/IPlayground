@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+
 using IPlayground.Data.Common.Models;
 
 namespace IPlayground.Data.Models

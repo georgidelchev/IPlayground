@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 using IPlayground.Data.Common.Repositories;
 using IPlayground.Data.Models;
 using IPlayground.Services.Mapping;
+using IPlayground.Web.ViewModels.Games;
 
 namespace IPlayground.Services.Data
 {
@@ -14,6 +16,19 @@ namespace IPlayground.Services.Data
         public GamesService(IDeletableEntityRepository<Game> gamesRepository)
         {
             this.gamesRepository = gamesRepository;
+        }
+
+        public async Task CreateAsync(CreateGameInputModel input, string userId)
+        {
+            var game = new Game()
+            {
+                AddedByUserId = userId,
+                Description = input.Description,
+                Price = input.Price,
+                Name = input.Name,
+            };
+
+            await this.gamesRepository.AddAsync(game);
         }
 
         public IEnumerable<T> GetAll<T>(int page, int itemsPerPage)

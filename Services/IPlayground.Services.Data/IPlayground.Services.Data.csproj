@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\IPlayground.Data.Common\IPlayground.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\IPlayground.Data.Models\IPlayground.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\IPlayground.Web.ViewModels\IPlayground.Web.ViewModels.csproj" />
     <ProjectReference Include="..\IPlayground.Services.Mapping\IPlayground.Services.Mapping.csproj" />
   </ItemGroup>
 

@@ -1,5 +1,7 @@
-﻿using IPlayground.Services.Data;
+﻿using IPlayground.Common;
+using IPlayground.Services.Data;
 using IPlayground.Web.ViewModels.Games;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IPlayground.Web.Controllers
@@ -13,16 +15,29 @@ namespace IPlayground.Web.Controllers
             this.gamesService = gamesService;
         }
 
-        public IActionResult All()
+        [HttpGet]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public IActionResult Create()
         {
-            var viewModel = new ListAllGamesViewModel
-            {
-                Games = this.gamesService.GetAll<GetAllGamesViewModel>(1, 12),
-            };
-
-            return this.View(viewModel);
+            return this.View();
         }
 
+        [HttpPost]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public IActionResult Create(CreateGameInputModel input)
+        {
+            return this.RedirectToAction(nameof(this.All));
+        }
+
+        [HttpGet]
+        public IActionResult All()
+            => this.View(new ListAllGamesViewModel
+            {
+                Games = this.gamesService
+                    .GetAll<GetAllGamesViewModel>(1, 12),
+            });
+
+        [HttpGet]
         public IActionResult Details(int id)
         {
             return this.View();

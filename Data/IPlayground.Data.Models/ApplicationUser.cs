@@ -37,5 +37,11 @@ namespace IPlayground.Data.Models
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
             = new HashSet<IdentityUserLogin<string>>();
+
+        public virtual ICollection<Game> Games { get; set; }
+            = new HashSet<Game>();
+
+        public virtual ICollection<News> News { get; set; }
+            = new HashSet<News>();
     }
 }

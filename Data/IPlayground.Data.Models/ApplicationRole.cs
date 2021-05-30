@@ -1,5 +1,4 @@
-﻿// ReSharper disable VirtualMemberCallInConstructor
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 using IPlayground.Data.Common.Models;

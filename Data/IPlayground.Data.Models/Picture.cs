@@ -1,26 +1,17 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 using IPlayground.Data.Common.Models;
 
 namespace IPlayground.Data.Models
 {
-    public class Picture : BaseDeletableModel<string>
+    public class Picture : BaseDeletableModel<int>
     {
-        public Picture()
-        {
-            this.Id = Guid
-                .NewGuid()
-                .ToString();
-        }
-
+        [Required]
+        [MaxLength(6)]
         public string Extension { get; set; }
 
-        public string AddedByUserId { get; set; }
-
-        public virtual ApplicationUser AddedByUser { get; set; }
-
-        public int GameId { get; set; }
-
-        public virtual Game Game { get; set; }
+        public ICollection<Game> Games { get; set; }
+            = new HashSet<Game>();
     }
 }

@@ -1,4 +1,6 @@
-﻿@model IPlayground.Web.ViewModels.Games.ListAllGamesViewModel
+﻿@using IPlayground.Common
+
+@model IPlayground.Web.ViewModels.Games.ListAllGamesViewModel
 
 @{
     this.ViewData["Title"] = "All Games";
@@ -7,25 +9,50 @@
 <div class="text-center text-warning text-capitalize">
     <h1>Our game collection.</h1>
 </div>
-
 <hr />
-<div class="row">
-    @foreach (var game in this.Model.Games)
-    {
-        <div class="card col-md-6 bg-light">
-            <div class="card-body text-center font-weight-bold">
-                @*@game.ShortName@if (game.Content.Length > 15)
-                    {<text>...</text>}*@
-                @game.Name
-                <hr/>
-                @game.CategoryName
-                <hr/>
-                @game.Description
-                <div>
-                    <a class="btn btn-info btn-sm" asp-controller="Games" asp-action="Details" asp-route-id="@game.Id">Read More</a>
+
+@if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+{
+    <div class="text-center">
+        <a asp-controller="Games" asp-action="Create" class="btn btn-primary btn-sm">Create</a>
+    </div>
+}
+
+@if (!this.Model.Games.Any())
+{
+    <div class="text-center text-warning text-capitalize">
+        <h4>We have no games right now.</h4>
+    </div>
+}
+else
+{
+    <div class="row">
+        @foreach (var game in this.Model.Games)
+        {
+            <div class="card col-md-6 bg-light">
+                <div class="card-body text-center font-italic">
+                    @*@game.ShortName@if (game.Content.Length > 15)
+                        {<text>...</text>}*@
+                    <strong>Game:</strong> @game.Name
+                    <hr />
+                    <strong>Category:</strong> @game.CategoryName
+                    <hr />
+                    <strong>Description:</strong> @game.Description
+                    <hr />
+                    @if (User.IsInRole(GlobalConstants.AdministratorRoleName))
+                    {
+                        <strong>Added by admin:</strong> @game.AddedByUserId
+                        <hr />
+                    }
+                    @game.PictureExtension
+                    <strong>Price:</strong> @game.Price
+                    <hr />
+                    <div>
+                        <a class="btn btn-info btn-sm" asp-controller="Games" asp-action="Details" asp-route-id="@game.Id">Details</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    }
-</div>
+        }
+    </div>
+}
 <hr />
