@@ -1,0 +1,70 @@
+﻿@model IPlayground.Web.ViewModels.Games.CreateGameInputModel
+
+@{
+    this.ViewData["Title"] = "Create Game";
+}
+
+<div class="text-center text-warning">
+    <h1>Hello, @User.Identity.Name!</h1>
+</div>
+
+<div class="text-center text-warning text-capitalize">
+    <h3>You can add a new game from the section below.</h3>
+</div>
+<i class="fas fa-file-signature"></i>
+
+<form method="post" class="col-md-6 offset-md-3 text-center" enctype="multipart/form-data">
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div>
+        <label asp-for="Name">Name</label><br/>
+        <span asp-validation-for="Name" class="text-danger"></span>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            </div>
+            <input asp-for="Name" placeholder="Name" class="form-control" />
+        </div>
+    </div>
+    <div>
+        <label asp-for="Price">Price</label><br />
+        <span asp-validation-for="Price" class="text-danger"></span>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            </div>
+            <input asp-for="Price" placeholder="Price" class="form-control" />
+        </div>
+    </div>
+    <div>
+        <label asp-for="Description">Description</label><br />
+        <span asp-validation-for="Description" class="text-danger"></span>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            </div>
+            <input asp-for="Description" placeholder="Description" class="form-control" />
+        </div>
+    </div>
+    <div>
+        <label asp-for="CategoryName">Category</label><br/>
+        <span asp-validation-for="CategoryName" class="text-danger"></span>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            </div>
+            <input asp-for="CategoryName" placeholder="Category" class="form-control" />
+        </div>
+    </div>
+   
+    <div class="form-group">
+        <label for="customFile">Upload Picture</label><br />
+        <span asp-validation-for="Picture" class="text-danger"></span>
+
+        <input type="file" class="form-control-file" id="customFile" asp-for="Picture" />
+    </div>
+
+    <button type="submit" class="btn btn-success btn-sm">Submit</button>
+    <hr />
+</form>

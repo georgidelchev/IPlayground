@@ -4,8 +4,10 @@ namespace IPlayground.Services.Data
 {
     public interface ICategoriesService
     {
-        Task CreateAsync();
+        Task<int> CreateAsync(string categoryName);
 
         bool IsCategoryExists(string categoryName);
+
+        int GetCategoryId(string categoryName);
     }
 }

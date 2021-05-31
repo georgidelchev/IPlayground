@@ -65,6 +65,7 @@ namespace IPlayground.Web
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IGamesService, GamesService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
+            services.AddTransient<IPicturesService, PicturesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

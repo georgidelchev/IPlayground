@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+
 using IPlayground.Data.Common.Repositories;
 using IPlayground.Data.Models;
 
@@ -14,14 +15,28 @@ namespace IPlayground.Services.Data
             this.categoriesRepository = categoriesRepository;
         }
 
-        public async Task CreateAsync()
+        public async Task<int> CreateAsync(string categoryName)
         {
-            throw new System.NotImplementedException();
+            var category = new Category()
+            {
+                Name = categoryName,
+            };
+
+            await this.categoriesRepository.AddAsync(category);
+            await this.categoriesRepository.SaveChangesAsync();
+
+            return category.Id;
         }
 
         public bool IsCategoryExists(string categoryName)
             => this.categoriesRepository
                 .AllAsNoTracking()
                 .Any(c => c.Name == categoryName);
+
+        public int GetCategoryId(string categoryName)
+            => this.categoriesRepository
+                .All()
+                .FirstOrDefault(c => c.Name == categoryName)
+                .Id;
     }
 }

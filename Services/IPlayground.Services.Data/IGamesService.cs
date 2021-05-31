@@ -7,7 +7,7 @@ namespace IPlayground.Services.Data
 {
     public interface IGamesService
     {
-        Task CreateAsync(CreateGameInputModel input, string userId);
+        Task CreateAsync(CreateGameInputModel input, string userId, string imagePath);
 
         IEnumerable<T> GetAll<T>(int page, int itemsPerPage);
 

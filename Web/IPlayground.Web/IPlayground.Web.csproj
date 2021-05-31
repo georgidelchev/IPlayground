@@ -40,4 +40,8 @@
     <ProjectReference Include="..\IPlayground.Web.Infrastructure\IPlayground.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\IPlayground.Web.ViewModels\IPlayground.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Pictures\GamesPictures\" />
+  </ItemGroup>
 </Project>

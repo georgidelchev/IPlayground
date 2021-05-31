@@ -11,11 +11,12 @@
 </div>
 <hr />
 
-@if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
 {
     <div class="text-center">
         <a asp-controller="Games" asp-action="Create" class="btn btn-primary btn-sm">Create</a>
     </div>
+    <br />
 }
 
 @if (!this.Model.Games.Any())
@@ -31,22 +32,23 @@ else
         {
             <div class="card col-md-6 bg-light">
                 <div class="card-body text-center font-italic">
+                    <img class="img-fluid" src="/Pictures/GamesPictures/Thumbnails/thumbnail-@game.Id.@game.PictureExtension"/>
                     @*@game.ShortName@if (game.Content.Length > 15)
                         {<text>...</text>}*@
                     <strong>Game:</strong> @game.Name
-                    <hr />
+                    <hr/>
                     <strong>Category:</strong> @game.CategoryName
-                    <hr />
+                    <hr/>
                     <strong>Description:</strong> @game.Description
-                    <hr />
+                    <hr/>
                     @if (User.IsInRole(GlobalConstants.AdministratorRoleName))
                     {
-                        <strong>Added by admin:</strong> @game.AddedByUserId
-                        <hr />
+                        <strong>Added by admin:</strong>
+                        @game.AddedByUserId
+                        <hr/>
                     }
-                    @game.PictureExtension
                     <strong>Price:</strong> @game.Price
-                    <hr />
+                    <hr/>
                     <div>
                         <a class="btn btn-info btn-sm" asp-controller="Games" asp-action="Details" asp-route-id="@game.Id">Details</a>
                     </div>
